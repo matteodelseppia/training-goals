@@ -4,72 +4,55 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calisthenics Progress</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-    }
-    .block {
-      margin-bottom: 40px;
-    }
-    .label {
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-    .bar {
-      width: 100%;
-      background: #eee;
-      border-radius: 6px;
-      overflow: hidden;
-      height: 24px;
-    }
-    .fill {
-      height: 100%;
-      background: #4caf50;
-      transition: width 0.3s ease;
-    }
-    .value {
-      margin-top: 4px;
-      font-size: 0.9rem;
-      color: #333;
-    }
-  </style>
-</head>
-<body>
-  <h1>Training Volume Goals</h1>
-  <p>Volume is calculated as reps x sets x weight in kg.</p>
+<style>
+  .bar {
+    width: 100%;
+    background: #eee;
+    border-radius: 6px;
+    overflow: hidden;
+    height: 24px;
+    position: relative;
+  }
+  .fill {
+    height: 100%;
+    background: #4caf50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+</style>
 
-  <!-- Weighted Pull-ups (Goal 500) -->
-  <div class="block">
-    <div class="label">Weighted Pull-ups (Goal 500)</div>
-    <!-- Update currentVolumePullups manually -->
-    <div class="bar"><div class="fill" style="width: calc((350 / 500) * 100%)"></div></div>
-    <div class="value">Current: 350 / 500</div>
+<div class="block">
+  <div class="label">Weighted Pull-ups (Goal 500)</div>
+  <div class="bar">
+    <div class="fill" id="pullup-fill"></div>
   </div>
+  <div class="value">Current: 350 / 500</div>
+</div>
 
-  <!-- Weighted Dips (Goal 750) -->
-  <div class="block">
-    <div class="label">Weighted Dips (Goal 750)</div>
-    <!-- Update currentVolumeDips manually -->
-    <div class="bar"><div class="fill" style="width: calc((560 / 750) * 100%)"></div></div>
-    <div class="value">Current: 560 / 750</div>
+<div class="block">
+  <div class="label">Weighted Dips (Goal 750)</div>
+  <div class="bar">
+    <div class="fill" id="dips-fill"></div>
   </div>
+  <div class="value">Current: 560 / 750</div>
+</div>
 
-  <!-- Weighted HSPU (Goal 125) -->
-  <div class="block">
-    <div class="label">Weighted HSPU (Goal 125)</div>
-    <!-- Update currentVolumeHSPU manually -->
-    <div class="bar"><div class="fill" style="width: calc((25 / 125) * 100%)"></div></div>
-    <div class="value">Current: 25 / 125</div>
-  </div>
+<script>
+  function setProgress(id, current, goal) {
+    const pct = (current / goal) * 100;
+    const fill = document.getElementById(id);
+    fill.style.width = pct + "%";
+    fill.textContent = Math.round(pct) + "%";
+  }
 
-  <!--
-    When you reach a goal:
-    - Leave that block filled at 100%.
-    - Duplicate the block below it.
-    - Change the goal or label as needed.
-  -->
+  setProgress("pullup-fill", 350, 500);
+  setProgress("dips-fill", 560, 750);
+</script>
+
 </body>
 </html>
 
